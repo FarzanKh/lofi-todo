@@ -6,7 +6,7 @@ const Alert = ({type, msg, removeAlert, list}) => {
             removeAlert()
         }, 3000)
         return () => clearTimeout(timeOut)
-    }, [list])
+    }, [])
     return (
         <div className={type === 'success' ? "alert alert-success shadow-lg opacity-50" : "alert alert-error shadow-lg opacity-80"}>
             <div>
