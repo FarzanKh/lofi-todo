@@ -34,7 +34,6 @@ const List = ({items, removeItem, editItem, showPlayer}) => {
                     </div>
                 )
             })}
-
         </>
     )
 }

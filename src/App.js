@@ -64,7 +64,6 @@ function App() {
 
     const removeItem = (id) => {
         showAlert(true, "error", "Item Removed");
-        // list.filter((item) => item.id !== id)
         setList(list.filter((item) => item.id !== id));
     }
 
