@@ -2,6 +2,8 @@ import React, {useState, useEffect} from "react";
 import List from './List'
 import Alert from './Alert'
 import MusicPlayer from "./MusicPlayer";
+import {db} from "./firebase/config";
+import {collection, getDocs} from 'firebase/firestore'
 
 const getLocalStorage = () => {
     let list = localStorage.getItem('list');
@@ -74,6 +76,20 @@ function App() {
     }
 
     useEffect(() => {
+        // Firebase stuff
+        async function fetchData() {
+            const querySnapshot =  await getDocs(collection(db, 'todos'));
+
+            querySnapshot.forEach((doc) => {
+                const data = doc.data();
+                console.log(data);
+
+            })
+        }
+        fetchData();
+        // Firebase stuff
+
+
         localStorage.setItem('list', JSON.stringify(list));
     }, [list])
 
@@ -81,9 +97,8 @@ function App() {
         <div className="container mx-auto mt-10">
             <div className="flex flex-row gap-4">
                 <div className="basis-1/4">
-                    <div className="card w-full bg-neutral-focus mt-10">
+                    <div className="rounded-md w-full bg-slate-200 mt-10">
                         <div className="card-body">
-
                             <div className="flex flex-col">
                                 <div className="basis-1">
                                     <article className="prose md:prose-lg lg:prose-xl prose-h1:text-sky-900 mb-4">
@@ -92,7 +107,7 @@ function App() {
                                 </div>
                                 <div className="basis-1">
                                     <input type="text" placeholder="Add Task"
-                                           className="input input-bordered w-full max-w-lg"
+                                           className="input input-bordered w-full max-w-lg text-base"
                                            value={name} onChange={(e) => setName(e.target.value)}/>
                                 </div>
 
@@ -102,7 +117,7 @@ function App() {
                             <form onSubmit={handleSubmit}>
                                 <div className="card-actions">
                                     <button type="submit"
-                                            className="btn gap-2 btn-primary btn-wide w-full">{isEditing ? 'Edit' : '+ Add'}
+                                            className="btn btn-wide w-full">{isEditing ? 'Edit' : '+ Add'}
                                     </button>
                                 </div>
                             </form>
@@ -112,69 +127,23 @@ function App() {
                 </div>
 
                 {list.length > 0 ? <div className="basis-3/4">
-                    <div className="card w-full border-4 border-cyan-600 mt-10">
-                        <div className="card-body">
-                            <article className="prose md:prose-lg lg:prose-xl prose-h1:text-cyan-600 mb-4">
-                                <h1>Todos</h1>
-                            </article>
-                            {list.length > 0 &&
-                                <List items={list} clearList={clearList} removeItem={removeItem} editItem={editItem}
-                                      showPlayer={startPlayer}/>}
-                            {list.length > 0 && showPlayer && <MusicPlayer hidePlayer={hidePlayer}/>}
+                    <div className="w-full border-2 border-slate-600 mt-10">
+
+                        {list.length > 0 &&
+                            <List items={list} clearList={clearList} removeItem={removeItem} editItem={editItem}
+                                  showPlayer={startPlayer}/>}
+                        {list.length > 0 && showPlayer && <MusicPlayer hidePlayer={hidePlayer}/>}
+                        <div className='flex items-center justify-center'>
+                            {list.length > 0 && <button className="btn btn-outline btn-error w-64 mb-6 mt-4"
+                                                        onClick={clearList}>Clear All</button>}
                         </div>
-                        {list.length > 0 && <button className="btn btn-outline btn-error w-64 rounded-full ml-6 mb-6"
-                                                    onClick={clearList}>Clear All</button>}
                     </div>
                 </div> : <div className="basis-3/4">
-                    <div className="card w-full border-4 border-cyan-900 mt-10">
+                    <div className="card w-full border-2 border-cyan-900 mt-10">
                         <div className="card-body">
-                            <article className="prose md:prose-lg lg:prose-xl prose-h1:text-cyan-600 mb-4">
-                                <h1>Create a task or pick a fun activity🙂</h1>
+                            <article className="prose md:prose-lg lg:prose-xl prose-h2:text-cyan-600 mb-4">
+                                <h2>Add a task or just relax🙂</h2>
                             </article>
-                            <div className="flex flex-row gap-4">
-                                <div className="basis-1/3">
-                                    <div className="card card-compact bg-base-100 image-full">
-                                        <figure>
-                                            <img src="https://seedpsychology.com.au/wp-content/uploads/2019/03/iStock-874376840-Copy.jpg" alt="Shoes"/>
-                                        </figure>
-                                        <div className="card-body">
-                                            <h2 className="card-title">Meditate!</h2>
-                                            <p>Just relax and be present</p>
-                                            <div className="card-actions justify-end">
-                                                <a href="https://meditofoundation.org/meditations"><button className="btn btn-outline btn-ghost">Meditate</button></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="basis-1/4 md:basis-1/3">
-                                    <div className="card card-compact bg-base-100 image-full">
-                                        <figure>
-                                            <img src="https://www.runtastic.com/blog/wp-content/uploads/2018/08/thumbnail_1200x800-1.jpg" alt="Shoes"/>
-                                        </figure>
-                                        <div className="card-body">
-                                            <h2 className="card-title">Workout!</h2>
-                                            <p>Just relax and be present</p>
-                                            <div className="card-actions justify-end">
-                                                <a href="https://www.healthline.com/health/fitness-exercise/at-home-workouts"><button className="btn btn-outline btn-ghost">Workout</button></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="basis-1/2 md:basis-1/3">
-                                    <div className="card card-compact bg-base-100 image-full">
-                                        <figure>
-                                            <img src="https://www.transcriptionoutsourcing.net/cdn-cgi/image/quality=80,format=auto,onerror=redirect,metadata=none/wp-content/uploads/2020/11/portrait-of-a-happy-young-woman-in-headphones-PYU8EVW-scaled.jpg" alt="workout"/>
-                                        </figure>
-                                        <div className="card-body">
-                                            <h2 className="card-title">Read!</h2>
-                                            <p>Just relax and be present</p>
-                                            <div className="card-actions justify-end">
-                                                <a href="https://getpocket.com/explore"><button className="btn btn-outline btn-ghost">Read</button></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>}
