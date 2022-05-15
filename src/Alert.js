@@ -8,7 +8,7 @@ const Alert = ({type, msg, removeAlert, list}) => {
         return () => clearTimeout(timeOut)
     }, [list, removeAlert])
     return (
-        <div className={type === 'success' ? "alert alert-success shadow-lg opacity-50" : "alert alert-error shadow-lg opacity-80"}>
+        <div className={type === 'success' ? "alert alert-success shadow-lg" : "alert alert-error shadow-lg"}>
             <div>
                 {type === 'success' ?
                     <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current flex-shrink-0 h-6 w-6" fill="none"

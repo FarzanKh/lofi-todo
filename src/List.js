@@ -7,11 +7,12 @@ const List = ({items, removeItem, editItem, showPlayer}) => {
         <>
             {items.map((item) => {
                 return (
-                    <div key={item.id} className="card w-full bg-base-300 text-primary-content">
+                    <div key={item.id} className="w-auto gap-2 bg-slate-200">
                         <div className="card-body">
-                            <article className="prose lg:prose-xl prose-p:text-cyan-400">
+                            <article className="prose lg:prose-xl prose-p:text-black">
                                 <p>{item.title}</p>
                             </article>
+
                             <div className="card-actions justify-end">
                                 <button onClick={() => editItem(item.id)} className="btn btn-circle btn-outline">
                                     <RiEdit2Fill size={28}/>
@@ -28,6 +29,7 @@ const List = ({items, removeItem, editItem, showPlayer}) => {
                                     </svg>
                                 </button>
                             </div>
+
                         </div>
                     </div>
                 )
