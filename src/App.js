@@ -141,7 +141,7 @@ function App() {
                                             <h2 className="card-title">Meditate!</h2>
                                             <p>Just relax and be present</p>
                                             <div className="card-actions justify-end">
-                                                <a href="https://meditofoundation.org/meditations" target="_blank"><button className="btn btn-outline btn-ghost">Meditate</button></a>
+                                                <a href="https://meditofoundation.org/meditations"><button className="btn btn-outline btn-ghost">Meditate</button></a>
                                             </div>
                                         </div>
                                     </div>
@@ -155,7 +155,7 @@ function App() {
                                             <h2 className="card-title">Workout!</h2>
                                             <p>Just relax and be present</p>
                                             <div className="card-actions justify-end">
-                                                <a href="https://www.healthline.com/health/fitness-exercise/at-home-workouts" target="_blank"><button className="btn btn-outline btn-ghost">Workout</button></a>
+                                                <a href="https://www.healthline.com/health/fitness-exercise/at-home-workouts"><button className="btn btn-outline btn-ghost">Workout</button></a>
                                             </div>
                                         </div>
                                     </div>
@@ -169,7 +169,7 @@ function App() {
                                             <h2 className="card-title">Read!</h2>
                                             <p>Just relax and be present</p>
                                             <div className="card-actions justify-end">
-                                                <a href="https://getpocket.com/explore" target="_blank"><button className="btn btn-outline btn-ghost">Read</button></a>
+                                                <a href="https://getpocket.com/explore"><button className="btn btn-outline btn-ghost">Read</button></a>
                                             </div>
                                         </div>
                                     </div>
